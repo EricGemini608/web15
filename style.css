@@ -1,0 +1,47 @@
+body {
+  font-family: 'Microsoft JhengHei', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 40px;
+  transition: background-image 0.5s, background-color 0.5s, color 0.5s;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('早上.jpg');
+  color: #003;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: #003;
+  padding: 30px;
+  width: 320px;
+  margin: 40px auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  border: none;
+  background-color: #0077be;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+body.dark-mode {
+  background-image: url('夜景.jpg');
+  color: white;
+}
+
+body.dark-mode .card {
+  background-color: rgba(30, 30, 30, 0.85);
+  color: white;
+}
+
+body.dark-mode button {
+  background-color: #00bcd4;
+}
