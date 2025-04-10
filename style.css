@@ -7,7 +7,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('早上.jpg');
+  background-image: url('風景.jpg');
   color: #003;
 }
 
@@ -33,7 +33,7 @@ button {
 }
 
 body.dark-mode {
-  background-image: url('夜景.jpg');
+  background-image: url('風景2.jpg');
   color: white;
 }
 
