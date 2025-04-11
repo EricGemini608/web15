@@ -1,47 +1,75 @@
 body {
-  font-family: 'Microsoft JhengHei', sans-serif;
-  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 40px;
-  transition: background-image 0.5s, background-color 0.5s, color 0.5s;
+  padding: 0;
+  background-image: url('https://images.unsplash.com/photo-1550966871-3edfd53febb4');
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center;
-  background-image: url('風景.jpg');
-  color: #003;
+  transition: background 0.5s ease;
 }
 
 .card {
-  background-color: rgba(255, 255, 255, 0.85);
-  color: #003;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
   padding: 30px;
-  width: 320px;
-  margin: 40px auto;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin: 100px auto;
+  width: 90%;
+  max-width: 500px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  text-align: center;
 }
 
-button {
-  padding: 10px 20px;
-  margin-top: 10px;
+.card h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card a {
+  display: block;
+  margin: 10px 0;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.card a:hover {
+  color: #ffd700;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
   border: none;
-  background-color: #0077be;
-  color: white;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-body.dark-mode {
-  background-image: url('風景2.jpg');
-  color: white;
+.toggle-btn:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
-body.dark-mode .card {
-  background-color: rgba(30, 30, 30, 0.85);
-  color: white;
+body.dark {
+  background-image: url('https://images.unsplash.com/photo-1519682577862-22b62b24e493');
 }
 
-body.dark-mode button {
-  background-color: #00bcd4;
+body.dark .card {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+body.dark .card a {
+  color: #cceeff;
+}
+
+body.dark .card a:hover {
+  color: #00ffff;
 }
