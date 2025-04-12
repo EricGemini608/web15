@@ -2,7 +2,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url('https://scontent.ftpe7-4.fna.fbcdn.net/v/t39.30808-6/478000357_642203504988510_3818546045462963798_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=KgLk3IyEO_gQ7kNvwEPH8Tg&_nc_oc=AdlGPPuWumUs_jRKXJqhQJWdCYvP-7FW74ZKh5gKfw54SxUI24dIoME6Dk1glWkTV3g&_nc_zt=23&_nc_ht=scontent.ftpe7-4.fna&_nc_gid=m4mOa-xiOxkvrXi82FhsHA&oh=00_AfFN7GxWlECVKscjGII7aQxUHdSdwvYetbaNmMO6tdDmsw&oe=67FF7BDE');
+  background-image: url('https://i.pinimg.com/736x/97/e0/22/97e022614fe021601d3bdd7fde30dbae.jpg');
   background-size: cover;
   background-position: center;
   transition: background 0.5s ease;
@@ -58,7 +58,7 @@ body {
 }
 
 body.dark {
-  background-image: url('https://scontent.ftpe7-1.fna.fbcdn.net/v/t39.30808-6/486680361_1825046781679574_2841758644775903856_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=iwDgGGAA-7IQ7kNvwH6LqXp&_nc_oc=Adl1ZhKQ8GdbMF65sCH-LuhkdZcFz2S-tv2TkdKlwGzx39i2yXKf3cSoxevIixCIL7A&_nc_zt=23&_nc_ht=scontent.ftpe7-1.fna&_nc_gid=Sv0dtAU9SD__YnGC1wbY7g&oh=00_AfFglgJ9D1ED9SJX0At-RvjOxyDw34lsOwO70bVjXoLF3g&oe=67FFA642');
+  background-image: url('https://static.popdaily.com.tw/u/202303/31c0e197-9c75-4869-8b86-825720a976e5.jpeg');
 }
 
 body.dark .card {
