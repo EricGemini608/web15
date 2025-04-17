@@ -1,66 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>品韜網頁設計(期中考)</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>品韜網頁設計（期中）</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #2f80ed;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      border-left: 6px solid #2f80ed;
+      padding-left: 0.75rem;
+      font-size: 1.75rem;
+      margin-top: 0;
+    }
+
+    section h3 {
+      font-size: 1.25rem;
+      color: #2f80ed;
+      margin-top: 1rem;
+    }
+
+    section p {
+      line-height: 1.6;
+      margin: 0.5rem 0;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .image-grid img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
 </head>
-<style>body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    color: rgb(0, 0, 0);
-    background-image: url("桌布背景.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-  }
-
-</style>
-</body>
 <body>
-<h1>我的目標</h1>
-    <img src="夢想.jpg">
-<div>
-<h2>未來夢想</h2><br>
-<h3>雖然我是讀資工系，相對的我之後可能會當工程師，但我並不是會局限在工程師，我也可以考警察當個資訊警察，或者是國防部資安作戰部隊/軍情局等
-    這是我的主業因為我也想當個斜槓青年副業可以當個Youtuber/演員/歌手等，所以我現在要好好充實我自己。(加油!!!我一定可以)</h3>
+  <header>
+    <h1>我的目標</h1>
+  </header>
+  <main>
+    <section>
+      <h2>未來夢想</h2>
+      <p>雖然我是讀資工系，之後可能會當工程師，但我並不局限於此。我也可以考警察當個資訊警察，或者是國防部資安作戰部隊/軍情局等。這是我的主業，因為我也想當個斜槓青年，副業可以當個 Youtuber、演員、歌手等，所以我現在要好好充實我自己。<strong><br>加油！我一定可以的！</strong></p>
+    </section>
 
-</div>
-<div>
-<h2>短期規劃目標</h2><br>
-<img src="目標.jpg">
-    <h4>英檢中級考過英檢中級考過=每天都要自律的練習英文(加油!!!)</h4>
-    <h4>鋼琴檢定5級=時常要練琴</h4><img src="2024鋼琴發表.jpg".>
-    <h4>網頁設計更專精=[不懂的]看書/問GPT/問老師</h4>
-    </div>
-    <div>
-        <h2>最有興趣的事</h2><img src="喜歡的事.jpg"><br>
-        <h3>1.喜愛我推的偶像</h3>
-        <h4>有時候心情不好時就會看我的偶像今劇來鼓勵自己</h4>
-        <h4>迪麗樂巴</h4> <img src="迪麗熱巴.jpg"><br>
-        <h4>「如果遇到了自己想做的事情，那就勇敢去做、大膽的付出吧。很多時候我們缺少的不是想法、不是能力，而是那份果斷和勇敢。」</h4>
-        <h4>周興哲</h4> <img src="周興哲.jpg"><br>
-        <h4>「我想做出，可以一直、一直重複放，都不會聽膩的歌。是一個讓他們一直想回去、重複聽的歌曲，這就是我做音樂目的。」</h4>
-        <h4>金世正</h4> <img src="金世正.jpg"><br>
-        <h4>「當你努力時機會不一定會來，但除了努力之外，你沒有其他方法讓機會來到身邊。」 「成長伴著痛苦，但撐過去後，你就會變得更強。</h4>
-        <h4>IU</h4><img src="IU.jpg"><br>
-        <h4>「我們經常會因為跟別人不一樣而被疏遠或指責，但其實是這些不一樣造就了我們的獨一無二與美好價值。」</h4>
-        <h4>朴寶劍</h4><img src="朴寶劍.jpg">><br>
-        <h4>「如果我在現實生活中遇到困難，會把挫敗、抑郁、自責的感情昇華為笑容，努力正面積極地去思考。」</h4>
-        <h4>黃景瑜</h4><img src="黃景瑜.jpg"><br>
-        <h4>自己的事还是要自己负责，至少自己的人生，你要握在手里。</h4>
-        <h3>2.鋼琴</h3>
-        <h4>目前已學過的歌曲:周興哲的想知道你在想什麼/史考特·喬普林-The Entertainer/麥爾斯·泰勒-great balls of fire</h4><br>
-        <h>現在想要學的歌曲:YOASOBI-向夜晚奔去跟我推得孩子(Ideo/Fate)/周興哲的想念你想我跟永不失聯的愛(我會加油的!!!)</h4><br>
-        </div>
-        <div>
-            <h2>我對目前階段的困擾</h2><img src="困擾.jpg"><br>
-            <h4>數學不會寫</h4>
-            <h4>畫畫沒有臨感</h4>
-            <h4>不要挑食</h4>
-            </div>
+    <section>
+      <h2>短期規劃目標</h2>
+      <h3>英檢中級考過</h3>
+      <p>每天都要自律地練習英文。<strong>加油！</strong></p>
+      <h3>鋼琴檢定 5 級</h3>
+      <p>時常要練琴。</p>
+      <h3>網頁設計更專精</h3>
+      <p>不懂的就看書、問 GPT、問老師。</p>
+    </section>
+    <section>
+      <h2>我對目前階段的困擾</h2>
+      <h3>數學不會寫</h3>
+      <p>問老師!?<strong>加油！!!我的數學</strong></p>
+      <h3>畫畫沒有臨感</h3>
+      <p>想想自己想要畫什麼。</p>
+      <h3>不要挑食</h3>
+      <p>有點難😅</p>
+    </section>
 
+    <section>
+      <h2>最有興趣的事</h2>
+      <h3>1. 喜愛我推的偶像</h3>
+      <div class="image-grid">
+        <img src="迪麗熱巴.jpg"alt="迪麗熱巴">
+        <img src="周興哲.jpg"alt="周興哲">
+        <img src="金世正.jpg" alt="金世正">
+        <img src="IU.jpg" alt="IU">
+        <img src="朴寶劍.jpg" alt="朴寶劍">
+        <img src="黃景瑜.jpg" alt="黃景瑜">
+        <!-- 請替換為實際圖片網址 -->
+      </div>
+      <p>有時候心情不好時就會看我的偶像劇來鼓勵自己。</p>
+      <ul>
+        <li><strong>迪麗熱巴：</strong>「如果遇到了自己想做的事情，那就勇敢去做、大膽的付出吧。很多時候我們缺少的不是想法、不是能力，而是那份果斷和勇敢。」</li>
+        <li><strong>周興哲：</strong>「我想做出，可以一直、一直重複放，都不會聽膩的歌。是一個讓他們一直想回去、重複聽的歌曲，這就是我做音樂的目的。」</li>
+        <li><strong>金世正：</strong>「當你努力時機會不一定會來，但除了努力之外，你沒有其他方法讓機會來到身邊。」</li>
+        <li><strong>IU：</strong>「我們經常會因為跟別人不一樣而被疏遠或指責，但其實是這些不一樣造就了我們的獨一無二與美好價值。」</li>
+        <li><strong>朴寶劍：</strong>「如果我在現實生活中遇到困難，會把挫敗、抑鬱、自責的感情昇華為笑容，努力正面積極地去思考。」</li>
+        <li><strong>黃景瑜：</strong>「自己的事還是要自己負責，至少自己的人生，你要握在手裡。」</li>
+      </ul>
 
-</body>
+      <h3>2. 鋼琴</h3>
+      <p>目前已學過的歌曲：</p>
+      <ul>
+        <li>周興哲的《想知道你在想什麼》</li>
+        <li>史考特·喬普林的《The Entertainer》</li>
+        <li>麥爾斯·泰勒的《Great Balls of Fire》</li>
+      </ul>
+      <p>現在想要學的歌曲清單清單：</p>
+      <ul>
+        <li>YOASOBI 的《向夜晚奔去》跟《我推得孩子的主題曲(Ideo/Fate)》</li>
+        <li>周興哲的《想念你想我》跟《永不失聯的愛》</li>
+          
+      
+</li>
 </html>
