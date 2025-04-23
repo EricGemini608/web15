@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Direction Example</title>
+    <style>
+        .container {
+            display: flex;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .item {
+            padding: 10px;
+            margin: 10px;
+            color: black;
+        }
+        .col {
+            flex-direction: column;
+        }
+        .col .item {
+            background: cyan;
+        }
+        .col-reverse {
+            flex-direction: column-reverse;
+        }
+        .col-reverse .item {
+            background: rgb(255, 123, 0);
+        }
+        .row {
+            flex-direction: row;
+        }
+        .row .item {
+            background: rgb(255, 217, 0);
+        }
+        .row-reverse {
+            flex-direction: row-reverse;
+        }
+        .row-reverse .item {
+            background: rgb(255, 161, 216);
+        }
+    </style>
+</head>
+<body>
+<h1>column</h1>
+    <div class="container col">
+        <div class="item">項目1</div>
+        <div class="item">項目2</div>
+        <div class="item">項目3</div>
+    </div>
+<h1>column-reverse</h1>
+    <div class="container col-reverse">
+        <div class="item">項目4</div>
+        <div class="item">項目5</div>
+        <div class="item">項目6</div>
+    </div>
+<h1>row</h1>
+    <div class="container row">
+        <div class="item">項目7</div>
+        <div class="item">項目8</div>
+        <div class="item">項目9</div>
+    </div>
+<h1>row-reverse</h1>
+    <div class="container row-reverse">
+        <div class="item">項目10</div>
+        <div class="item">項目11</div>
+        <div class="item">項目12</div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flex Align Items Example</title>
+  <style>
+    .container {
+      display: flex;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .item {
+      padding: 10px;
+      margin: 10px;
+      color: black;
+    }
+
+    .baseline {
+      align-items: baseline;
+      background: rgb(255, 255, 0);
+    }
+
+    .baseline .item {
+      background: cyan;
+    }
+
+    .start {
+      align-items: flex-start;
+      background: rgb(255, 0, 0);
+    }
+
+    .start .item {
+      background: rgb(0, 255, 0);
+    }
+
+    .end {
+      align-items: flex-end;
+      background: rgb(255, 0, 149);
+    }
+
+    .end .item {
+      background: rgb(255, 230, 0);
+    }
+
+    .center {
+      align-items: center;
+      background: rgb(38, 0, 255);
+    }
+
+    .center .item {
+      background: rgb(0, 153, 255);
+    }
+
+    .baseline-alt {
+      align-items: baseline;
+      background: rgb(255, 145, 0);
+    }
+
+    .baseline-alt .item {
+      background: rgb(255, 230, 0);
+    }
+  </style>
+</head>
+<body>
+<h1>container baseline</h1>
+  <div class="container baseline">
+    <div class="item">項目1<br>項目1</div>
+    <div class="item">項目2</div>
+    <div class="item">項目3</div>
+  </div>
+<h1>container start</h1>
+  <div class="container start">
+    <div class="item">項目4<br>項目4</div>
+    <div class="item">項目5</div>
+    <div class="item">項目6</div>
+  </div>
+<h1>container end</h1>
+  <div class="container end">
+    <div class="item">項目7<br>項目7</div>
+    <div class="item">項目8</div>
+    <div class="item">項目9</div>
+  </div>
+<h1>container center</h1>
+  <div class="container center">
+    <div class="item">項目10<br>項目10</div>
+    <div class="item">項目11</div>
+    <div class="item">項目12</div>
+  </div>
+<h1>container baseline-alt</h1>
+  <div class="container baseline-alt">
+    <div class="item">項目13<br>項目13</div>
+    <div class="item">項目14</div>
+    <div class="item">項目15</div>
+  </div>
+
+</body>
+</html>
