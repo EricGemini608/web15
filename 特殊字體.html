@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>背景剪裁文字效果</title>
+  <style>
+    h1 {
+      margin: 10px;
+      padding: 0;
+      width: max-content;
+      font-family: impact, arial-black; /* 設定成比較粗的字體 */
+      font-size: 80px;
+      line-height: 1;
+    }
+
+    /* 沒有設定 background-clip，無法顯示剪裁效果 */
+    .a0 {
+      background: linear-gradient(#f00, #f90, #fd0, #0c0, #09f);
+    }
+
+    /* 有 background-clip: text，但缺少文字填色透明 */
+    .a1 {
+      color: #000;
+      background: linear-gradient(#f00, #f90, #fd0, #0c0, #09f);
+      background-clip: text;
+    }
+
+    /* 正確顯示漸層背景文字效果 */
+    .a2 {
+      color: #000;
+      background: linear-gradient(#f00 50%, #fa0 50%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* 使用圖片當作文字背景 */
+    .a3 {
+      color: #000;
+      background: url("https://steam.oxxostudio.tw/image/index-css.jpg");
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="a0">HAVE A NICE DAY!</h1>
+  <h1 class="a1">HAVE A NICE DAY!</h1>
+  <h1 class="a2">HAVE A NICE DAY!</h1>
+  <h1 class="a3">HAVE A NICE DAY!</h1>
+</body>
+</html>
