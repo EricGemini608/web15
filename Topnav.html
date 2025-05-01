@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>網站首頁</title>
+  <style>
+    .topnav {
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    .topnav a {
+      float: left;
+      color: #ffd09a;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a:hover, .dropdown:hover .dropbtn {
+      background-color: #929292;
+      color: white;
+    }
+
+    .topnav a.active {
+      background-color: #ffc979;
+      color: white;
+    }
+
+    /* Dropdown container */
+    .dropdown {
+      float: left;
+      overflow: hidden;
+    }
+
+    /* Dropdown button */
+    .dropbtn {
+      font-size: 17px;
+      border: none;
+      outline: none;
+      color: #ffd09a;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+    }
+
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    /* Dropdown links */
+    .dropdown-content a {
+      float: none;
+      color: #ffd09a;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #929292;
+      color: white;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="website.html">首頁</a>
+
+    <!-- 下拉選單：網頁設計 -->
+    <div class="dropdown">
+      <button class="dropbtn">網頁設計</button>
+      <div class="dropdown-content">
+        <a href="https://ericgemini608.github.io/web15/color.html" target="_blank">顏色特效</a>
+        <a href="https://ericgemini608.github.io/web15/%E7%89%B9%E6%AE%8A%E5%AD%97%E9%AB%94.html" target="_blank">特殊字體</a>
+      </div>
+    </div>
+
+    <a href="#contact">專題製作</a>
+    <a href="#about">聯絡資訊</a>
+  </div>
+</body>
+</html>
