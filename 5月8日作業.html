@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>紙飛機介紹</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      margin: 0;
+      background-color: #ffcc8a;
+    }
+
+    .header-title {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffe6c0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hamburger {
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #aef0f0;
+      padding: 10px;
+      border-radius: 8px;
+      width: 150px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .caption {
+      margin-top: 5px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #444;
+        padding: 10px;
+      }
+
+      .menu a {
+        margin: 5px 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .menu.show {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 標題 -->
+  <div class="header-title">
+    <h1>介紹第4組每個人紙飛機</h1>
+  </div>
+
+  <!-- 導覽列 -->
+  <div class="navbar">
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <div class="menu" id="menu">
+      <a href="#">選項一</a>
+      <a href="#">選項二</a>
+      <a href="#">選項三</a>
+      <a href="#">選項四</a>
+      <a href="#">選項五</a>
+      <a href="#">選項六</a>
+    </div>
+  </div>
+
+  <!-- 圖片區 -->
+  <div class="gallery">
+    <div class="card">
+      <img src="谷品韜.jpg" alt="紙飛機" />
+      <div class="caption">谷品韜:呵呵呵~<br>我折5台!!!</div>
+    </div>
+    <div class="card">
+      <img src="果媽.jpg" alt="我推的Vtuber"/>
+      <div class="caption">果媽:到底是誰把垃圾放在餐桌上?<br>是誰啊!難以忍受!</div>
+    </div>
+    <div class="card">
+      <img src="真理果.jpg" alt="我推的Vtuber" />
+      <div class="caption">真理果:呵呵呵~我不識滴妹!!!<br>要我講幾次~</div>
+    </div>
+    <div class="card">
+      <img src="吳同學.jpg" alt="紙飛機" />
+      <div class="caption">我手骨折!!!<br>我還是寫程式好了!我是佐助本人</div>
+    </div>
+    <div class="card">
+      <img src="李同學.jpg" alt="紙飛機" />
+      <div class="caption">我要買三麗鷗的<br>火災調查員!!!<br>我是空巴挖</div>
+    </div>
+    <div class="card">
+        <img src="馬同學.jpg" alt="紙飛機" />
+        <div class="caption">我飛機飛不回來!!!我是馬同學</div>
+      </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("show");
+    }
+  </script>
+
+</body>
+</html>
