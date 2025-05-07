@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回應式網頁切換</title>
+    <link rel="stylesheet" type="text/css" href="rwd-layout2.css" />
+    <style>
+.list {
+    display: flex; 
+    /* 讓下一層元素水平排列 */
+    justify-content: center;
+  }
+  
+  .item {
+    background-color: pink;
+    flex: none;
+    width: 280px;
+    margin: 10px;
+  }
+  @media only screen and (max-width: 1250px) {
+  /* 螢幕小於1250px 通用以下*/
+    .list {
+      flex-wrap: wrap;
+    }
+  
+    .item {
+      width: 45%;
+    }
+  }
+    </style>
+</head>
+<body>
+    <div class="list">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+    </div>
+</body>
+</html>
