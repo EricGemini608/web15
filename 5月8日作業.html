@@ -31,9 +31,8 @@
       font-size: 24px;
       cursor: pointer;
       display: none;
-      position: absolute;
-      top: 10px;
-      right: 20px;
+      text-align: center;
+      width: 100%;
     }
 
     .menu {
@@ -79,6 +78,11 @@
     }
 
     @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+        margin: 0 auto;
+      }
+
       .menu {
         display: none;
         flex-direction: column;
@@ -88,10 +92,6 @@
 
       .menu a {
         margin: 5px 0;
-      }
-
-      .hamburger {
-        display: block;
       }
 
       .menu.show {
@@ -124,7 +124,7 @@
   <div class="gallery">
     <div class="card">
       <img src="谷品韜.jpg" alt="紙飛機" />
-      <div class="caption">谷品韜:哈哈哈~<br>我折5台!!!</div>
+      <div class="caption">谷品韜:呵呵呵~<br>我折5台!!!</div>
     </div>
     <div class="card">
       <img src="果媽.jpg" alt="我推的Vtuber"/>
@@ -143,9 +143,9 @@
       <div class="caption">我要買Line的<br>火災調查員!!!<br>我是空巴挖</div>
     </div>
     <div class="card">
-        <img src="馬同學.jpg" alt="紙飛機" />
-        <div class="caption">我飛機飛不回來!!!我是馬同學</div>
-      </div>
+      <img src="馬同學.jpg" alt="紙飛機" />
+      <div class="caption">我飛機飛不回來!!!我是馬同學</div>
+    </div>
   </div>
 
   <script>
