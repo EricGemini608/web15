@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>我喜歡的飲料</h2>
+  
+    <h3> 直向排列</h3>
+    <script>
+      let drinks = ['原翠玉露', '麥翠麥茶', '珍珠奶茶', '古早味紅茶', '洛神花茶', '全糖奶茶', '無糖茶'];
+  
+      document.write('<table border="1" cellpadding="10">');
+      for (let i = 0; i < drinks.length; i++) {
+        document.write('<tr><td>飲料' + (i + 1) + '</td><td>' + drinks[i] + '</td></tr>');
+      }
+      document.write('</table>');
+    </script>
+  
+    <br>
+  
+    <h3> 橫向排列</h3>
+    <script>
+      document.write('<table border="1" cellpadding="10"><tr>');
+      for (let i = 0; i < drinks.length; i++) {
+        document.write('<th>飲料' + (i + 1) + '</th>');
+      }
+      document.write('</tr><tr>');
+      for (let i = 0; i < drinks.length; i++) {
+        document.write('<td>' + drinks[i] + '</td>');
+      }
+      document.write('</tr></table>');
+    </script>
+  
+  </body>
+  
+      
+</html>

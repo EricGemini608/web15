@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>選舉資格判斷</title>
+</head>
+<body>
+
+<script>
+  // 最上方訊息
+  document.write("Hello world<br><br>");
+
+  // 中間訊息
+  document.write("Have a nice day<br><br>");
+
+  // 建立物件
+  let man = new Object();
+  man.age = 16;
+  man.name = "小韜";
+
+  // 方法：自我介紹
+  man.talk = function() {
+    return "Hello 我是 " + this.name + "，我今年 " + this.age + " 歲。";
+  };
+
+  // 方法：選舉資格判斷
+  man.canVote = function() {
+    if (this.age < 20) {
+      return "未滿20歲，不能參加選舉。";
+    } else {
+      return "可以參加選舉。";
+    }
+  };
+
+  // 輸出自我介紹與判斷結果
+  document.write(man.talk() + "<br>");
+  document.write(man.canVote());
+</script>
+
+</body>
+</html>
+
