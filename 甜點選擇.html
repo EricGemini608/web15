@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>甜點調查</title>
+</head>
+<body>
+  喜歡的甜點：
+  <form>
+    <input type="radio" name="dessert" value="馬卡龍">馬卡龍<br>
+    <input type="radio" name="dessert" value="舒芙蕾">舒芙蕾<br>
+    <input type="radio" name="dessert" value="蘋果派">蘋果派<br>
+    <input type="radio" name="dessert" value="水果塔">水果塔<br>
+    <input type="submit" onclick="showResult(); return false;" value="送出">
+    <input type="reset" value="重設">
+  </form>
+
+  <script>
+    function showResult() {
+      // 宣告一個空字串用來存放使用者所核取的甜點
+      var result = '';
+      var dessert = document.getElementsByName('dessert');
+
+      // 逐一檢查選擇鈕是否有被核取
+      for (var i = 0; i < dessert.length; i++) {
+        // 若選擇鈕有被核取，就取得其值並跳出迴圈
+        if (dessert[i].checked) {
+          result = dessert[i].value;
+          break;
+        }
+      }
+
+      // 顯示結果
+      window.alert(result);
+    }
+  </script>
+</body>
+</html>
