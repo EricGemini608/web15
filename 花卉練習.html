@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>花卉介紹</title>
+    <style>
+        .flower-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>花卉介紹</h1>
+
+        <button onclick="showFlower('hydrangea')">繡球花</button>
+        <button onclick="showFlower('oncidium')">文心蘭</button>
+        <button onclick="showFlower('rose')">玫瑰</button>
+        <button onclick="showFlower('desert-rose')">沙漠玫瑰</button>
+        <button onclick="showFlower('carnation')">康乃馨</button>
+        <button onclick="showFlower('orchid')">蘭花</button>
+
+        <div id="hydrangea" class="flower-section">
+            <h2>1. 繡球花</h2>
+            <img src="https://hips.hearstapps.com/hmg-prod/images/%E9%AB%98%E5%AE%B6%E7%B9%A1%E7%90%83%E8%8A%B1-1618458093.jpeg" alt="繡球花圖片" width="300">
+            <p>
+                2024繡球花季到啦！每年5月至6月初夏季節，粉藍、粉紫、粉紅等各色錦簇花團，
+                在陽明山竹子湖、新北萬里高家花田、雪霸休閒農場、武陵農場、明池森林遊樂區等地爭相綻放。
+            </p>
+        </div>
+
+        <div id="oncidium" class="flower-section">
+            <h2>2. 文心蘭</h2>
+            <img src="https://www.flower.org.tw/ezfiles/276/1276/pictures/244/m/mczh-tw700x700_large144840.jpg" alt="文心蘭圖片" width="300">
+            <p>
+                文心蘭花朵形似穿著膨鬆舞裙、迎風起舞的女郎，因此又稱「跳舞蘭」，在切花與盆花市場上佔有重要地位。
+            </p>
+        </div>
+
+        <div id="rose" class="flower-section">
+            <h2>3. 玫瑰</h2>
+            <img src="https://cdn.cybassets.com/s/files/26168/ckeditor/pictures/content_603956c0-be05-4e26-8b7b-660a24d2b3b3.jpg" alt="玫瑰圖片" width="300">
+            <p>
+                玫瑰（Rosa）是薔薇科的植物，是全球最受歡迎的花卉之一，代表愛與浪漫。
+            </p>
+        </div>
+
+        <div id="desert-rose" class="flower-section">
+            <h2>4. 沙漠玫瑰</h2>
+            <img src="https://succuland.com.tw/wp-content/uploads/2021/07/%E6%B2%99%E6%BC%A0%E7%8E%AB%E7%91%B02-550x367.jpg" alt="沙漠玫瑰圖片" width="300">
+            <p>
+                沙漠玫瑰（Adenium obesum）屬於夾竹桃科，原產於非洲和阿拉伯，並非真正的玫瑰。
+            </p>
+        </div>
+
+        <div id="carnation" class="flower-section">
+            <h2>5. 康乃馨</h2>
+            <img src="https://www.travel.taipei/image/177296/?r=1590453387456" alt="康乃馨圖片" width="300">
+            <p>
+                康乃馨是石竹科的多年生草本植物，常見於母親節，是愛與祝福的象徵。
+            </p>
+        </div>
+
+        <div id="orchid" class="flower-section">
+            <h2>6. 蘭花</h2>
+            <img src="https://www.uflowershop.com/img/cms/blog/5/dim-hou.jpg" alt="蘭花圖片" width="300">
+            <p>
+                蘭花是單子葉植物中最大的一個科，品種繁多，象徵高潔與優雅。
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showFlower(flowerId) {
+            const sections = document.querySelectorAll('.flower-section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            const selected = document.getElementById(flowerId);
+            if (selected) {
+                selected.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+
