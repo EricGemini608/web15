@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maii Official</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+    }
+
+    header {
+      background-color: #ffc06e;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      font-size: 28px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+
+    .hamburger::before {
+      content: "☰";
+    }
+
+    .hamburger.active::before {
+      content: "✖";
+    }
+
+    nav {
+      flex-direction: column;
+      align-items: center;
+      background-color: #ffc06e;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    nav.show {
+      max-height: 500px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    nav a {
+      display: block;
+      margin: 10px 0;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #ffc06e;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>品韜</h1>
+    <button class="hamburger" onclick="toggleMenu()" id="hamburgerBtn"></button>
+    <nav id="navMenu">
+      <a href="#">首頁</a>
+      <a href="#">關於我</a>
+      <a href="#">作品集</a>
+      <a href="#">聯絡</a>
+    </nav>
+  </header>
+  <main>
+    <h2>歡迎來到 韜韜的網站！</h2>
+    <p>這裡是韜韜的官方網站，敬請期待更多內容！</p>
+  </main>
+  <footer>
+    &copy; 2025 韜韜的網頁by(期末). 保留所有權利。
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navMenu");
+      const btn = document.getElementById("hamburgerBtn");
+      nav.classList.toggle("show");
+      btn.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
