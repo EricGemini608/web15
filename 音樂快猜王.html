@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>聽歌猜歌名</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      padding: 20px;
+      background-color: #ffc595;
+      text-align: center;
+      position: relative;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    h2 {
+      color: #333;
+    }
+    .question {
+      margin: auto;
+      margin-top: 60px;
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 2px solid #ffbf49;
+      border-radius: 10px;
+      background-color: #fff4e0;
+      max-width: 600px;
+    }
+    .choices button {
+      margin: 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background-color: #f0f0f0;
+    }
+    .choices button:hover:not(:disabled) {
+      background-color: #d0e8ff;
+    }
+    .choices button:disabled {
+      background-color: #ddd;
+      cursor: not-allowed;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .image-box img {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    #nextBtn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+    #drawBox {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background-color: #fff4e0;
+      border: 2px solid #ffbf49;
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      text-align: center;
+      user-select: none;
+    }
+    #drawBox button {
+      padding: 5px 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      background-color: #ff9800;
+      color: white;
+      cursor: pointer;
+    }
+    #drawResult {
+      margin-top: 5px;
+      font-weight: bold;
+      color: #6a1b9a;
+    }
+  </style>
+</head>
+<body>
+  <div id="drawBox">
+    <button onclick="drawNumber()">🎲 抽號碼</button>
+    <div id="drawResult">--</div>
+  </div>
+
+  <h1>聽歌猜歌名</h1>
+
+  <div class="question" id="questionBox">
+    <h2 id="questionTitle"></h2>
+    <div id="audioPlayer"></div>
+    <div class="choices" id="choicesBox"></div>
+    <div class="result" id="resultBox"></div>
+    <div class="image-box" id="imageBox"></div>
+    <button id="nextBtn" onclick="nextQuestion()">下一題</button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        title: "第1題",
+        audio: "music1.mp3",
+        choices: [
+          { text: "G大調第13號小夜曲", correct: false },
+          { text: "小星星變奏曲", correct: false },
+          { text: "土耳其進行曲", correct: true }
+        ],
+        info: "沃夫岡·阿瑪迪斯·莫札特 - 土耳其進行曲",
+        image: "img1.jpg"
+      },
+      {
+        title: "第2題",
+        audio: "music2.mp3",
+        choices: [
+          { text: "少女的祈禱", correct: true },
+          { text: "給愛麗絲", correct: false },
+          { text: "小狗圓舞曲", correct: false }
+        ],
+        info: "特克拉·巴達捷夫斯卡-巴拉諾夫斯卡 - 少女的祈禱",
+        image: "img2.jpg"
+      },
+      {
+        title: "第3題",
+        audio: "music3.mp3",
+        choices: [
+          { text: "威風凜凜進行曲", correct: false },
+          { text: "軍隊進行曲", correct: true },
+          { text: "土耳其進行曲", correct: false }
+        ],
+        info: "舒伯特 - 軍隊進行曲",
+        image: "img3.jpg"
+      },
+      {
+        title: "第4題",
+        audio: "music4.mp3",
+        choices: [
+          { text: "多拉A夢", correct: true },
+          { text: "蠟筆小新", correct: false },
+          { text: "烏龍派出所", correct: false }
+        ],
+        info: "多拉A夢主題曲",
+        image: "img4.jpg"
+      },
+      {
+        title: "第5題",
+        audio: "music5.mp3",
+        choices: [
+          { text: "摯友", correct: true },
+          { text: "有一種悲傷", correct: false },
+          { text: "海洋之心", correct: false }
+        ],
+        info: "A-Lin - 摯友",
+        image: "img5.jpg"
+      },
+      // 後面題目是「聽歌只能按鈕顯示答案」
+      {
+        title: "第6題",
+        audio: "music6.mp3",
+        mode: "listen-only",
+        originalAudio: "music6.mp3",
+        answer: "我推的孩子第二季-GEMN - Fatal",
+        info: "我推的孩子第二季 - GEMN - Fatal",
+        image: "img6.jpg"
+      },
+      {
+        title: "第7題",
+        audio: "music7.mp3",
+        mode: "listen-only",
+        originalAudio: "music7.mp3",
+        answer: "陳華-想和你看五月的晚霞",
+        info: "陳華 - 想和你看五月的晚霞",
+        image: "img7.jpg"
+      },
+      {
+        title: "第8題",
+        audio: "music8.mp3",
+        mode: "listen-only",
+        originalAudio: "music8.mp3",
+        answer: "王ADEN-23/17",
+        info: "王ADEN - 23/17",
+        image: "img8.jpg"
+      },
+      {
+        title: "第9題",
+        audio: "music9.mp3",
+        mode: "listen-only",
+        originalAudio: "music9.mp3",
+        answer: "LBI利比-跳樓機",
+        info: "LBI利比 - 跳樓機",
+        image: "img9.jpg"
+      },
+      {
+        title: "第10題",
+        audio: "music10.mp3",
+        mode: "listen-only",
+        originalAudio: "music10.mp3",
+        answer: "張杰-不眠之夜",
+        info: "張杰 - 不眠之夜",
+        image: "img10.jpg"
+      },
+      {
+        title: "第11題",
+        audio: "music11.mp3",
+        mode: "listen-only",
+        originalAudio: "music11.mp3",
+        answer: "永夜星河-寄明月",
+        info: "永夜星河 - 寄明月",
+        image: "img11.jpg"
+      },
+      {
+        title: "第12題",
+        audio: "music12.mp3",
+        mode: "listen-only",
+        originalAudio: "music12.mp3",
+        answer: "班恩-想你想你",
+        info: "班恩 - 想你想你",
+        image: "img12.jpg"
+      },
+      {
+        title: "第13題",
+        audio: "music13.mp3",
+        mode: "listen-only",
+        originalAudio: "music13.mp3",
+        answer: "Seventeen-cheer to youth",
+        info: "Seventeen - cheer to youth",
+        image: "img13.jpg"
+      },
+      {
+        title: "第14題",
+        audio: "music14.mp3",
+        mode: "listen-only",
+        originalAudio: "music14.mp3",
+        answer: "Twice-What is Love?",
+        info: "Twice - What is Love?",
+        image: "img14.jpg"
+      },
+      {
+        title: "第15題",
+        audio: "music15.mp3",
+        mode: "listen-only",
+        originalAudio: "music15.mp3",
+        answer: "周興哲-想知道你在想什麼",
+        info: "周興哲 - 想知道你在想什麼",
+        image: "img15.jpg"
+      }
+    ];
+
+    let current = 0;
+
+    function getRandomNumber() {
+      return Math.floor(Math.random() * 50) + 1;
+    }
+
+    function drawNumber() {
+      document.getElementById("drawResult").textContent = getRandomNumber();
+    }
+
+    function loadQuestion() {
+      const q = questions[current];
+      document.getElementById("questionTitle").textContent = q.title;
+
+      const audioBox = document.getElementById("audioPlayer");
+      audioBox.innerHTML = `<audio controls><source src="${q.audio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
+
+      const choicesBox = document.getElementById("choicesBox");
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+
+      choicesBox.innerHTML = "";
+      resultBox.textContent = "";
+      resultBox.style.color = "#333";
+      imageBox.innerHTML = "";
+      document.getElementById("nextBtn").style.display = "none";
+
+      // 移除 infoBox （如果有）
+      const infoBox = document.getElementById("infoBox");
+      if (infoBox) infoBox.remove();
+
+      if (q.mode === "listen-only") {
+        // 聽歌只能顯示「顯示答案」按鈕
+        const btn = document.createElement("button");
+        btn.textContent = "顯示答案";
+        btn.onclick = () => showAnswer(q, btn);
+        choicesBox.appendChild(btn);
+      } else {
+        // 一般選擇題
+        q.choices.forEach(choice => {
+          const btn = document.createElement("button");
+          btn.textContent = choice.text;
+          btn.onclick = () => checkAnswer(choice.correct, btn);
+          choicesBox.appendChild(btn);
+        });
+      }
+    }
+
+    function checkAnswer(isCorrect, btn) {
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+      const infoBoxId = "infoBox";
+
+      if (isCorrect) {
+        resultBox.textContent = "✅ 答對了！";
+        resultBox.style.color = "green";
+      } else {
+        resultBox.textContent = "❌ 答錯了！";
+        resultBox.style.color = "red";
+      }
+
+      // 建立 infoBox
+      let infoBox = document.getElementById(infoBoxId);
+      if (!infoBox) {
+        infoBox = document.createElement("div");
+        infoBox.id = infoBoxId;
+        infoBox.style.marginTop = "10px";
+        infoBox.style.fontStyle = "italic";
+        infoBox.style.color = "#666";
+        resultBox.parentNode.appendChild(infoBox);
+      }
+      infoBox.textContent = questions[current].info || "";
+
+      if (questions[current].image) {
+        const img = document.createElement("img");
+        img.src = questions[current].image;
+        imageBox.appendChild(img);
+      }
+
+      // 禁用所有選項按鈕
+      document.querySelectorAll(".choices button").forEach(b => b.disabled = true);
+
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function showAnswer(q, btn) {
+      btn.disabled = true;
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+      const audioBox = document.getElementById("audioPlayer");
+      const infoBoxId = "infoBox";
+
+      resultBox.textContent = "正確答案是：" + q.answer;
+      resultBox.style.color = "green";
+
+      let infoBox = document.getElementById(infoBoxId);
+      if (!infoBox) {
+        infoBox = document.createElement("div");
+        infoBox.id = infoBoxId;
+        infoBox.style.marginTop = "10px";
+        infoBox.style.fontStyle = "italic";
+        infoBox.style.color = "#666";
+        resultBox.parentNode.appendChild(infoBox);
+      }
+      infoBox.textContent = q.info || "";
+
+      // 重新載入原始音檔
+      audioBox.innerHTML = `<audio controls><source src="${q.originalAudio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
+
+      if (q.image) {
+        const img = document.createElement("img");
+        img.src = q.image;
+        imageBox.appendChild(img);
+      }
+
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("questionBox").innerHTML = "<h2>🎉 恭喜完成所有題目！</h2>";
+      }
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>
