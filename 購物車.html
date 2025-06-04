@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>真理果周邊</title>
+</head>
+<body>
+    <button id="totalBtn">購物車總額</button>
+    <button id="clearBtn">清空購物車</button>
+    <div id="totalDisplay"></div> <!-- 顯示總額 -->
+
+    <div class="product">
+        <img src="涼感排汗運動T恤 .png" alt="涼感排汗運動T恤">
+        <p class="price">$890</p>
+        <button class="addBtn">加入購物車</button>
+    </div>
+
+    <div class="product">
+        <img src="發光鍵帽鑰匙圈 .png" alt="發光鍵帽鑰匙圈">
+        <p class="price">$300</p>
+        <button class="addBtn">加入購物車</button>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const addButtons = document.querySelectorAll('.addBtn');
+        const prices = document.querySelectorAll('.price');
+        const totalDisplay = document.getElementById('totalDisplay');
+
+        // 顯示購物車總額
+        function updateTotalDisplay() {
+            const total = cart.reduce((sum, price) => sum + price, 0);
+            totalDisplay.textContent = `購物車總額：$${total}`;
+        }
+
+        // 加入商品按鈕事件
+        addButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                const priceText = prices[index].textContent;
+                const price = parseInt(priceText.replace('$', ''));
+                cart.push(price);
+                localStorage.setItem('cart', JSON.stringify(cart)); // 儲存到 localStorage
+                console.log(`已加入商品，價格：$${price}`);
+                alert(`已加入商品，價格：$${price}`);
+                updateTotalDisplay();
+            });
+        });
+
+        // 顯示總額按鈕
+        document.getElementById('totalBtn').addEventListener('click', () => {
+            const total = cart.reduce((sum, price) => sum + price, 0);
+            console.log(`購物車總額：$${total}`);
+            alert(`購物車總額：$${total}`);
+            updateTotalDisplay();
+        });
+
+        // 清空購物車
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            cart = [];
+            localStorage.removeItem('cart');
+            alert('購物車已清空');
+            updateTotalDisplay();
+        });
+
+        // 初次載入時更新顯示
+        updateTotalDisplay();
+    </script>
+</body>
+</html>
