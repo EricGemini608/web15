@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>聯絡我們</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Microsoft JhengHei", Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .contact-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 120px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background-color:rgb(255, 200, 138);
+      color: rgb(255, 171, 132);
+      border: none;
+      border-radius: 6px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffab2e;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* ✅ 響應式設計：螢幕小於 600px 時自動調整 */
+    @media (max-width: 600px) {
+      .contact-container {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      input, textarea {
+        font-size: 16px;
+        padding: 10px;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-container">
+    <h2>聯絡我們</h2>
+    <form action="#" method="post">
+      <label for="name">姓名</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">電子信箱</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="subject">主旨</label>
+      <input type="text" id="subject" name="subject" />
+
+      <label for="message">留言內容</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">送出</button>
+    </form>
+  </div>
+
+  <div class="footer">© 2025 韜韜的網頁 by(期末)聯絡表</div>
+</body>
+</html>
