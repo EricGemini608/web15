@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員表單</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url(''); 
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .header {
+            background-color: #A3D8F4CC; /* 加一點透明感 */
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+        }
+        .section {
+            margin: 10px 0;
+            padding: 10px;
+        }
+        .label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+        }
+        .input-field {
+            width: 200px;
+            padding: 5px;
+        }
+        .light-blue {
+            background-color: #D6EAF8CC; /* 加透明度 */
+        }
+        .purple {
+            background-color: #D7BDE2CC; /* 加透明度 */
+        }
+        .submit-btn {
+            background-color: #3498DB;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #2980B9;
+        }
+        .checkbox-group {
+            margin-left: 10px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .half-section {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <form id="memberForm" onsubmit="handleSubmit(event)">
+        <div class="header">會員表單</div>
+        <div class="section light-blue">
+            <p>請輸入帳號</p>
+            <div>
+                <span class="label">帳號</span>
+                <input type="text" class="input-field" name="username" placeholder="帳號">
+            </div>
+            <div>
+                <span class="label">請輸入E-mail</span>
+                <input type="email" class="input-field" name="email" placeholder="E-mail">
+            </div>
+        </div>
+        <div class="section purple">
+            <p>請輸入生日</p>
+            <div>
+                <span class="label">年/月/日</span>
+                <input type="date" class="input-field" name="birthdate">
+                <span class="label">手機號碼</span>
+                <input type="tel" class="input-field" name="phone" placeholder="手機號碼">
+                <span class="label">家用電話</span>
+                <input type="tel" class="input-field" name="homePhone" placeholder="家用電話">
+            </div>
+        </div>
+        <div class="section purple">
+            <div class="row">
+                <div class="half-section">
+                    <p>請選擇學歷:</p>
+                    <div>
+                        <span class="label">學歷</span>
+                        <select class="input-field" name="education">
+                            <option value="">請選擇</option>
+                            <option value="bachelor">學士</option>
+                            <option value="master">碩士</option>
+                            <option value="phd">博士</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="half-section">
+                    <p>請選性別</p>
+                    <div>
+                        <span class="label">性別</span>
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">男</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">女</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="submit-btn">送出</button>
+        </div>
+    </form>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert("已送出");
+        }
+    </script>
+</body>
+</html>
