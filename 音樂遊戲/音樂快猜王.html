@@ -168,24 +168,26 @@
       },
       {
         title: "第6題",
-        audio: "【TNT時代少年團  丁程鑫】【Ding ChengXin】 - TNT 時代少年團【丁程鑫】個人頻道 Ding Cheng Xin.mp3",
+        audio: "TNT 時代少年團 丁程鑫.mp3",
         choices: [
-          { text: " 米津玄師 Lemon", correct: false},
-          { text: "時代少年團lemon中文版", correct: true},
+          { text: "米津玄師 Lemon", correct: false },
+          { text: "時代少年團lemon中文版", correct: true }
         ],
-           info: "優酸乳×時代少年團 嚼檸檬主題曲中文版《Lemon》🍋",
+        info: "優酸乳×時代少年團 嚼檸檬主題曲中文版《Lemon》🍋",
         image: "寂寞寂寞起來.jpg"
+      },
       {
-      title: "第7題",
+        title: "第7題",
         audio: "萃茗 - 真理果.mp3",
         choices: [
           { text: "柚感", correct: false },
           { text: "萃茗", correct: true },
-          { text: "暇音 ", correct: false }
+          { text: "暇音", correct: false }
         ],
-        info: "真理果-萃茗 ",
+        info: "真理果 - 萃茗",
         image: "真理果果.jpg"
       },
+      {
         title: "第8題",
         audio: "music10.mp3",
         mode: "listen-only",
@@ -202,7 +204,8 @@
         answer: "Seventeen-cheer to youth",
         info: "Seventeen - cheer to youth",
         image: "img13.jpg"
-      },
+      }
+    ];
 
     let current = 0;
 
@@ -231,18 +234,15 @@
       imageBox.innerHTML = "";
       document.getElementById("nextBtn").style.display = "none";
 
-      // 移除 infoBox （如果有）
       const infoBox = document.getElementById("infoBox");
       if (infoBox) infoBox.remove();
 
       if (q.mode === "listen-only") {
-        // 聽歌只能顯示「顯示答案」按鈕
         const btn = document.createElement("button");
         btn.textContent = "顯示答案";
         btn.onclick = () => showAnswer(q, btn);
         choicesBox.appendChild(btn);
       } else {
-        // 一般選擇題
         q.choices.forEach(choice => {
           const btn = document.createElement("button");
           btn.textContent = choice.text;
@@ -265,7 +265,6 @@
         resultBox.style.color = "red";
       }
 
-      // 建立 infoBox
       let infoBox = document.getElementById(infoBoxId);
       if (!infoBox) {
         infoBox = document.createElement("div");
@@ -283,9 +282,7 @@
         imageBox.appendChild(img);
       }
 
-      // 禁用所有選項按鈕
       document.querySelectorAll(".choices button").forEach(b => b.disabled = true);
-
       document.getElementById("nextBtn").style.display = "inline-block";
     }
 
@@ -310,7 +307,6 @@
       }
       infoBox.textContent = q.info || "";
 
-      // 重新載入原始音檔
       audioBox.innerHTML = `<audio controls><source src="${q.originalAudio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
 
       if (q.image) {
@@ -327,7 +323,10 @@
       if (current < questions.length) {
         loadQuestion();
       } else {
-        document.getElementById("questionBox").innerHTML = "<h2>🎉 恭喜完成所有題目！</h2>";
+        document.getElementById("questionBox").innerHTML = `
+          <h2>🎉 恭喜完成所有題目！</h2>
+          <button onclick="location.reload()">🔁 重新開始</button>
+        `;
       }
     }
 
