@@ -174,7 +174,7 @@
           { text: "時代少年團lemon中文版", correct: true }
         ],
         info: "優酸乳×時代少年團 嚼檸檬主題曲中文版《Lemon》🍋",
-        image: "https://i.ytimg.com/vi/qL0aMZD27mI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAhMiRcs16pj-tKKmb-ahHJiZKvTg"
+        image: "https://i.ytimg.com/vi/qL0aMZD27mI/hq720.jpg"
       },
       {
         title: "第7題",
@@ -185,7 +185,7 @@
           { text: "暇音", correct: false }
         ],
         info: "真理果 - 萃茗",
-        image: "https://i.ytimg.com/vi/hnegbepHVSg/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCmf6qLxeWK9UXYiRt7otUF7hTgvg"
+        image: "https://i.ytimg.com/vi/hnegbepHVSg/hq720.jpg"
       },
       {
         title: "第8題",
@@ -222,7 +222,7 @@
       document.getElementById("questionTitle").textContent = q.title;
 
       const audioBox = document.getElementById("audioPlayer");
-      audioBox.innerHTML = <audio controls><source src="${q.audio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>;
+      audioBox.innerHTML = `<audio controls><source src="${q.audio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
 
       const choicesBox = document.getElementById("choicesBox");
       const resultBox = document.getElementById("resultBox");
@@ -307,7 +307,7 @@
       }
       infoBox.textContent = q.info || "";
 
-      audioBox.innerHTML = <audio controls><source src="${q.originalAudio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>;
+      audioBox.innerHTML = `<audio controls><source src="${q.originalAudio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
 
       if (q.image) {
         const img = document.createElement("img");
@@ -323,10 +323,10 @@
       if (current < questions.length) {
         loadQuestion();
       } else {
-        document.getElementById("questionBox").innerHTML = 
+        document.getElementById("questionBox").innerHTML = `
           <h2>🎉 恭喜完成所有題目！</h2>
           <button onclick="location.reload()">🔁 重新開始</button>
-        ;
+        `;
       }
     }
 
