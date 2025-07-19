@@ -11,13 +11,11 @@
       background-color: #ffc595;
       text-align: center;
       position: relative;
+      overflow-x: hidden;
     }
-    h1 {
-      margin-top: 0;
-    }
-    h2 {
-      color: #333;
-    }
+    h1 { margin-top: 0; }
+    h2 { color: #333; }
+
     .question {
       margin: auto;
       margin-top: 60px;
@@ -28,6 +26,7 @@
       background-color: #fff4e0;
       max-width: 600px;
     }
+
     .choices button {
       margin: 5px;
       padding: 10px 15px;
@@ -38,18 +37,22 @@
       background-color: #f0f0f0;
       transition: transform 0.2s ease;
     }
+
     .choices button:hover:not(:disabled) {
       background-color: #d0e8ff;
       transform: scale(1.05);
     }
+
     .choices button:disabled {
       background-color: #ddd;
       cursor: not-allowed;
     }
+
     .result {
       font-weight: bold;
       margin-top: 10px;
     }
+
     .image-box img {
       margin-top: 10px;
       max-width: 100%;
@@ -57,6 +60,7 @@
       border-radius: 10px;
       object-fit: contain;
     }
+
     #nextBtn {
       display: none;
       margin-top: 20px;
@@ -68,6 +72,7 @@
       color: white;
       cursor: pointer;
     }
+
     #drawBox {
       position: fixed;
       top: 10px;
@@ -80,6 +85,7 @@
       text-align: center;
       user-select: none;
     }
+
     #drawBox button {
       padding: 5px 10px;
       font-size: 14px;
@@ -89,6 +95,7 @@
       color: white;
       cursor: pointer;
     }
+
     #drawResult {
       margin-top: 5px;
       font-weight: bold;
@@ -103,15 +110,33 @@
     #drawResult.animate {
       animation: flash 0.5s ease-in-out;
     }
+
+    /* 🎵 音符動畫 */
+    @keyframes floatNotes {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+    .note {
+      position: fixed;
+      font-size: 24px;
+      color: #ffffff88;
+      animation: floatNotes 5s linear infinite;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
+  <div id="noteContainer"></div>
+
   <div id="drawBox">
     <button onclick="drawNumber()">🎲 抽號碼</button>
     <div id="drawResult">--</div>
   </div>
 
   <h1>聽曲猜歌</h1>
+  <div id="gameStats" style="margin-top: 10px;">
+    ⏱️ 時間：<span id="timer">0</span> 秒 ｜ 🎯 分數：<span id="score">0</span>
+  </div>
 
   <div class="question" id="questionBox">
     <h2 id="questionTitle"></h2>
@@ -143,7 +168,7 @@
           { text: "給愛麗絲", correct: false },
           { text: "小狗圓舞曲", correct: false }
         ],
-        info: "特克拉·巴達捷夫斯卡-巴拉諾夫斯卡 - 少女的祈禱",
+        info: "特克拉·巴達捷夫斯卡 - 少女的祈禱",
         image: "img2.jpg"
       },
       {
@@ -156,62 +181,47 @@
         ],
         info: "舒伯特 - 軍隊進行曲",
         image: "img3.jpg"
-      },
-      {
-        title: "第4題",
-        audio: "music4.mp3",
-        choices: [
-          { text: "多拉A夢", correct: true },
-          { text: "蠟筆小新", correct: false },
-          { text: "烏龍派出所", correct: false }
-        ],
-        info: "多拉A夢主題曲",
-        image: "https://upload.wikimedia.org/wikipedia/zh/b/b0/Doraemon_Charactor.jpg"
-      },
-      {
-        title: "第5題",
-        audio: "music5.mp3",
-        choices: [
-          { text: "摯友", correct: true },
-          { text: "有一種悲傷", correct: false },
-          { text: "海洋之心", correct: false }
-        ],
-        info: "A-Lin - 摯友",
-        image: "https://cdn-p.smehost.net/sites/d563907ee0c84f41b15553bfb3eb554c/wp-content/uploads/2022/03/19439976852.jpg"
-      },
-      {
-        title: "第6題",
-        audio: "music10.mp3",
-        mode: "listen-only",
-        originalAudio: "music10.mp3",
-        answer: "張杰-不眠之夜",
-        info: "張杰 - 不眠之夜",
-        image: "img10.jpg"
-      },
-      {
-        title: "第7題",
-        audio: "music13.mp3",
-        mode: "listen-only",
-        originalAudio: "music13.mp3",
-        answer: "Seventeen-cheer to youth",
-        info: "Seventeen - cheer to youth",
-        image: "img13.jpg"
       }
     ];
 
     let current = 0;
+    let score = 0;
+    let timer = 0;
+    let timerInterval;
 
-    function getRandomNumber() {
-      return Math.floor(Math.random() * 50) + 1;
+    function startTimer() {
+      timer = 0;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timer++;
+        document.getElementById("timer").textContent = timer;
+      }, 1000);
+    }
+
+    function updateScore(change) {
+      score += change;
+      document.getElementById("score").textContent = score;
     }
 
     function drawNumber() {
       const drawResult = document.getElementById("drawResult");
-      drawResult.textContent = getRandomNumber();
+      drawResult.textContent = Math.floor(Math.random() * 50) + 1;
       drawResult.classList.remove("animate");
       void drawResult.offsetWidth;
       drawResult.classList.add("animate");
     }
+
+    function createNote() {
+      const note = document.createElement("div");
+      note.className = "note";
+      note.textContent = "🎵";
+      note.style.left = Math.random() * 100 + "vw";
+      note.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(note);
+      setTimeout(() => note.remove(), 5000);
+    }
+
+    setInterval(createNote, 800);
 
     function loadQuestion() {
       const q = questions[current];
@@ -267,10 +277,12 @@
         resultBox.textContent = "✅ 答對了！";
         resultBox.style.color = "green";
         btn.style.backgroundColor = "#c8f7c5";
+        updateScore(10);
       } else {
         resultBox.textContent = "❌ 答錯了！";
         resultBox.style.color = "red";
         btn.style.backgroundColor = "#f7c5c5";
+        updateScore(-5);
       }
 
       let infoBox = document.getElementById(infoBoxId);
@@ -300,50 +312,21 @@
       document.getElementById("nextBtn").style.display = "inline-block";
     }
 
-    function showAnswer(q, btn) {
-      btn.disabled = true;
-      const resultBox = document.getElementById("resultBox");
-      const imageBox = document.getElementById("imageBox");
-      const audioBox = document.getElementById("audioPlayer");
-      const infoBoxId = "infoBox";
-
-      resultBox.textContent = "正確答案是：" + q.answer;
-      resultBox.style.color = "green";
-
-      let infoBox = document.getElementById(infoBoxId);
-      if (!infoBox) {
-        infoBox = document.createElement("div");
-        infoBox.id = infoBoxId;
-        infoBox.style.marginTop = "10px";
-        infoBox.style.fontStyle = "italic";
-        infoBox.style.color = "#666";
-        resultBox.parentNode.appendChild(infoBox);
-      }
-      infoBox.textContent = q.info || "";
-
-      audioBox.innerHTML = `<audio controls><source src="${q.originalAudio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
-
-      if (q.image) {
-        const img = document.createElement("img");
-        img.src = q.image;
-        imageBox.appendChild(img);
-      }
-
-      document.getElementById("nextBtn").style.display = "inline-block";
-    }
-
     function nextQuestion() {
       current++;
       if (current < questions.length) {
         loadQuestion();
       } else {
+        clearInterval(timerInterval);
         document.getElementById("questionBox").innerHTML = `
           <h2>🎉 恭喜完成所有題目！</h2>
+          <p>總時間：${timer} 秒 ｜ 總分數：${score} 分</p>
           <button onclick="location.reload()">🔁 重新開始</button>
         `;
       }
     }
 
+    startTimer();
     loadQuestion();
   </script>
 </body>
