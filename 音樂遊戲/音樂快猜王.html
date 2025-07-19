@@ -111,7 +111,6 @@
       animation: flash 0.5s ease-in-out;
     }
 
-    /* 🎵 音符動畫 */
     @keyframes floatNotes {
       0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
@@ -181,9 +180,16 @@
         ],
         info: "舒伯特 - 軍隊進行曲",
         image: "img3.jpg"
-      }
-    ];
-      info: "多拉A夢主題曲",
+      },
+      {
+        title: "第4題",
+        audio: "music4.mp3",
+        choices: [
+          { text: "蠟筆小新主題曲", correct: false },
+          { text: "多啦A夢主題曲", correct: true },
+          { text: "櫻桃小丸子主題曲", correct: false }
+        ],
+        info: "多拉A夢主題曲",
         image: "https://upload.wikimedia.org/wikipedia/zh/b/b0/Doraemon_Charactor.jpg"
       },
       {
@@ -283,12 +289,6 @@
       if (q.mode === "listen-only") {
         const btn = document.createElement("button");
         btn.textContent = "顯示答案";
-        btn.style.padding = "10px 15px";
-        btn.style.fontSize = "16px";
-        btn.style.borderRadius = "5px";
-        btn.style.border = "1px solid #ccc";
-        btn.style.backgroundColor = "#f0f0f0";
-        btn.style.cursor = "pointer";
         btn.onclick = () => showAnswer(q, btn);
         choicesBox.appendChild(btn);
       } else {
@@ -342,6 +342,34 @@
         }
       });
 
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function showAnswer(q, btn) {
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+
+      resultBox.textContent = `🎧 正確答案：${q.answer}`;
+      resultBox.style.color = "#333";
+
+      let infoBox = document.getElementById("infoBox");
+      if (!infoBox) {
+        infoBox = document.createElement("div");
+        infoBox.id = "infoBox";
+        infoBox.style.marginTop = "10px";
+        infoBox.style.fontStyle = "italic";
+        infoBox.style.color = "#666";
+        resultBox.parentNode.appendChild(infoBox);
+      }
+      infoBox.textContent = q.info || "";
+
+      if (q.image) {
+        const img = document.createElement("img");
+        img.src = q.image;
+        imageBox.appendChild(img);
+      }
+
+      btn.disabled = true;
       document.getElementById("nextBtn").style.display = "inline-block";
     }
 
