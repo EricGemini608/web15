@@ -5,41 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>聽曲猜歌</title>
   <style>
-    :root {
-      --bg-color: #ffc595;
-      --text-color: #000;
-      --question-bg: #fff4e0;
-      --border-color: #ffbf49;
-    }
-
-    body.dark-mode {
-      --bg-color: #1e1e1e;
-      --text-color: #eee;
-      --question-bg: #2c2c2c;
-      --border-color: #666;
-    }
-
     body {
       font-family: "Arial", sans-serif;
       padding: 20px;
-      background-color: var(--bg-color);
-      color: var(--text-color);
+      background-color: #ffc595;
       text-align: center;
       position: relative;
       overflow-x: hidden;
     }
-
     h1 { margin-top: 0; }
-    h2 { color: var(--text-color); }
+    h2 { color: #333; }
 
     .question {
       margin: auto;
       margin-top: 60px;
       margin-bottom: 30px;
       padding: 20px;
-      border: 2px solid var(--border-color);
+      border: 2px solid #ffbf49;
       border-radius: 10px;
-      background-color: var(--question-bg);
+      background-color: #fff4e0;
       max-width: 600px;
     }
 
@@ -93,8 +77,8 @@
       position: fixed;
       top: 10px;
       right: 20px;
-      background-color: var(--question-bg);
-      border: 2px solid var(--border-color);
+      background-color: #fff4e0;
+      border: 2px solid #ffbf49;
       padding: 10px 15px;
       border-radius: 10px;
       box-shadow: 0 0 5px rgba(0,0,0,0.2);
@@ -112,14 +96,6 @@
       cursor: pointer;
     }
 
-    #themeToggle {
-      position: fixed;
-      top: 10px;
-      left: 20px;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
     #drawResult {
       margin-top: 5px;
       font-weight: bold;
@@ -131,7 +107,6 @@
       50% { color: #ff5722; transform: scale(1.3); }
       100% { color: #6a1b9a; transform: scale(1); }
     }
-
     #drawResult.animate {
       animation: flash 0.5s ease-in-out;
     }
@@ -140,7 +115,6 @@
       0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
-
     .note {
       position: fixed;
       font-size: 24px;
@@ -148,42 +122,273 @@
       animation: floatNotes 5s linear infinite;
       pointer-events: none;
     }
-
-    @media (max-width: 600px) {
-      .question { padding: 15px; }
-      .choices button { width: 90%; max-width: 300px; font-size: 14px; }
-      #nextBtn { width: 80%; }
-      #drawBox, #themeToggle { font-size: 18px; padding: 5px; }
-    }
   </style>
 </head>
 <body>
   <div id="noteContainer"></div>
-  <div id="themeToggle" onclick="toggleTheme()">🌙</div>
+
   <div id="drawBox">
     <button onclick="drawNumber()">🎲 抽號碼</button>
     <div id="drawResult">--</div>
   </div>
 
-  <!-- 其餘結構與原始內容保持一致，JS 修改將放入 script 中處理 -->
+  <h1>聽曲猜歌</h1>
+  <div id="gameStats" style="margin-top: 10px;">
+    ⏱️ 時間：<span id="timer">0</span> 秒 ｜ 🎯 分數：<span id="score">0</span>
+  </div>
+
+  <div class="question" id="questionBox">
+    <h2 id="questionTitle"></h2>
+    <div id="audioPlayer"></div>
+    <div class="choices" id="choicesBox"></div>
+    <div class="result" id="resultBox"></div>
+    <div class="image-box" id="imageBox"></div>
+    <button id="nextBtn" onclick="nextQuestion()">下一題</button>
+  </div>
 
   <script>
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark) document.body.classList.add('dark-mode');
+    const questions = [
+      {
+        title: "第1題",
+        audio: "music1.mp3",
+        choices: [
+          { text: "G大調第13號小夜曲", correct: false },
+          { text: "小星星變奏曲", correct: false },
+          { text: "土耳其進行曲", correct: true }
+        ],
+        info: "沃夫岡·阿瑪迪斯·莫札特 - 土耳其進行曲",
+        image: "img1.jpg"
+      },
+      {
+        title: "第2題",
+        audio: "music2.mp3",
+        choices: [
+          { text: "少女的祈禱", correct: true },
+          { text: "給愛麗絲", correct: false },
+          { text: "小狗圓舞曲", correct: false }
+        ],
+        info: "特克拉·巴達捷夫斯卡 - 少女的祈禱",
+        image: "img2.jpg"
+      },
+      {
+        title: "第3題",
+        audio: "music3.mp3",
+        choices: [
+          { text: "威風凜凜進行曲", correct: false },
+          { text: "軍隊進行曲", correct: true },
+          { text: "土耳其進行曲", correct: false }
+        ],
+        info: "舒伯特 - 軍隊進行曲",
+        image: "img3.jpg"
+      },
+      {
+        title: "第4題",
+        audio: "music4.mp3",
+        choices: [
+          { text: "蠟筆小新主題曲", correct: false },
+          { text: "多啦A夢主題曲", correct: true },
+          { text: "櫻桃小丸子主題曲", correct: false }
+        ],
+        info: "多拉A夢主題曲",
+        image: "https://upload.wikimedia.org/wikipedia/zh/b/b0/Doraemon_Charactor.jpg"
+      },
+      {
+        title: "第5題",
+        audio: "music5.mp3",
+        choices: [
+          { text: "摯友", correct: true },
+          { text: "有一種悲傷", correct: false },
+          { text: "海洋之心", correct: false }
+        ],
+        info: "A-Lin - 摯友",
+        image: "https://cdn-p.smehost.net/sites/d563907ee0c84f41b15553bfb3eb554c/wp-content/uploads/2022/03/19439976852.jpg"
+      },
+      {
+        title: "第6題",
+        audio: "music10.mp3",
+        mode: "listen-only",
+        originalAudio: "music10.mp3",
+        answer: "張杰-不眠之夜",
+        info: "張杰 - 不眠之夜",
+        image: "img10.jpg"
+      },
+      {
+        title: "第7題",
+        audio: "music13.mp3",
+        mode: "listen-only",
+        originalAudio: "music13.mp3",
+        answer: "Seventeen-cheer to youth",
+        info: "Seventeen - cheer to youth",
+        image: "img13.jpg"
+      }
+    ];
 
-    function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
-      document.getElementById("themeToggle").textContent = document.body.classList.contains("dark-mode") ? "🌞" : "🌙";
+    let current = 0;
+    let score = 0;
+    let timer = 0;
+    let timerInterval;
+
+    function startTimer() {
+      timer = 0;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timer++;
+        document.getElementById("timer").textContent = timer;
+      }, 1000);
     }
 
-    const originalQuestions = [...questions];
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    function updateScore(change) {
+      score += change;
+      document.getElementById("score").textContent = score;
+    }
+
+    function drawNumber() {
+      const drawResult = document.getElementById("drawResult");
+      drawResult.textContent = Math.floor(Math.random() * 50) + 1;
+      drawResult.classList.remove("animate");
+      void drawResult.offsetWidth;
+      drawResult.classList.add("animate");
+    }
+
+    function createNote() {
+      const note = document.createElement("div");
+      note.className = "note";
+      note.textContent = "🎵";
+      note.style.left = Math.random() * 100 + "vw";
+      note.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(note);
+      setTimeout(() => note.remove(), 5000);
+    }
+
+    setInterval(createNote, 800);
+
+    function loadQuestion() {
+      const q = questions[current];
+      document.getElementById("questionTitle").textContent = q.title;
+
+      const audioBox = document.getElementById("audioPlayer");
+      audioBox.innerHTML = `<audio controls><source src="${q.audio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
+      const audio = audioBox.querySelector("audio");
+      audio.addEventListener("play", () => {
+        document.getElementById("choicesBox").scrollIntoView({ behavior: "smooth" });
+      });
+
+      const choicesBox = document.getElementById("choicesBox");
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+
+      choicesBox.innerHTML = "";
+      resultBox.textContent = "";
+      resultBox.style.color = "#333";
+      imageBox.innerHTML = "";
+      document.getElementById("nextBtn").style.display = "none";
+
+      const infoBox = document.getElementById("infoBox");
+      if (infoBox) infoBox.remove();
+
+      if (q.mode === "listen-only") {
+        const btn = document.createElement("button");
+        btn.textContent = "顯示答案";
+        btn.onclick = () => showAnswer(q, btn);
+        choicesBox.appendChild(btn);
+      } else {
+        q.choices.forEach(choice => {
+          const btn = document.createElement("button");
+          btn.textContent = choice.text;
+          btn.onclick = () => checkAnswer(choice.correct, btn);
+          choicesBox.appendChild(btn);
+        });
       }
     }
-    shuffleArray(questions);
+
+    function checkAnswer(isCorrect, btn) {
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+      const infoBoxId = "infoBox";
+
+      if (isCorrect) {
+        resultBox.textContent = "✅ 答對了！";
+        resultBox.style.color = "green";
+        btn.style.backgroundColor = "#c8f7c5";
+        updateScore(10);
+      } else {
+        resultBox.textContent = "❌ 答錯了！";
+        resultBox.style.color = "red";
+        btn.style.backgroundColor = "#f7c5c5";
+        updateScore(-5);
+      }
+
+      let infoBox = document.getElementById(infoBoxId);
+      if (!infoBox) {
+        infoBox = document.createElement("div");
+        infoBox.id = infoBoxId;
+        infoBox.style.marginTop = "10px";
+        infoBox.style.fontStyle = "italic";
+        infoBox.style.color = "#666";
+        resultBox.parentNode.appendChild(infoBox);
+      }
+      infoBox.textContent = questions[current].info || "";
+
+      if (questions[current].image) {
+        const img = document.createElement("img");
+        img.src = questions[current].image;
+        imageBox.appendChild(img);
+      }
+
+      document.querySelectorAll(".choices button").forEach(b => {
+        b.disabled = true;
+        if (b.textContent === questions[current].choices?.find(c => c.correct)?.text) {
+          b.style.backgroundColor = "#c8f7c5";
+        }
+      });
+
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function showAnswer(q, btn) {
+      const resultBox = document.getElementById("resultBox");
+      const imageBox = document.getElementById("imageBox");
+
+      resultBox.textContent = `🎧 正確答案：${q.answer}`;
+      resultBox.style.color = "#333";
+
+      let infoBox = document.getElementById("infoBox");
+      if (!infoBox) {
+        infoBox = document.createElement("div");
+        infoBox.id = "infoBox";
+        infoBox.style.marginTop = "10px";
+        infoBox.style.fontStyle = "italic";
+        infoBox.style.color = "#666";
+        resultBox.parentNode.appendChild(infoBox);
+      }
+      infoBox.textContent = q.info || "";
+
+      if (q.image) {
+        const img = document.createElement("img");
+        img.src = q.image;
+        imageBox.appendChild(img);
+      }
+
+      btn.disabled = true;
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        clearInterval(timerInterval);
+        document.getElementById("questionBox").innerHTML = `
+          <h2>🎉 恭喜完成所有題目！</h2>
+          <p>總時間：${timer} 秒 ｜ 總分數：${score} 分</p>
+          <button onclick="location.reload()">🔁 重新開始</button>
+        `;
+      }
+    }
+
+    startTimer();
+    loadQuestion();
   </script>
 </body>
 </html>
