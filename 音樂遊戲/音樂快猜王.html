@@ -36,9 +36,11 @@
       border: 1px solid #ccc;
       cursor: pointer;
       background-color: #f0f0f0;
+      transition: transform 0.2s ease;
     }
     .choices button:hover:not(:disabled) {
       background-color: #d0e8ff;
+      transform: scale(1.05);
     }
     .choices button:disabled {
       background-color: #ddd;
@@ -51,7 +53,9 @@
     .image-box img {
       margin-top: 10px;
       max-width: 100%;
+      max-height: 300px;
       border-radius: 10px;
+      object-fit: contain;
     }
     #nextBtn {
       display: none;
@@ -89,6 +93,15 @@
       margin-top: 5px;
       font-weight: bold;
       color: #6a1b9a;
+    }
+
+    @keyframes flash {
+      0% { color: #6a1b9a; transform: scale(1); }
+      50% { color: #ff5722; transform: scale(1.3); }
+      100% { color: #6a1b9a; transform: scale(1); }
+    }
+    #drawResult.animate {
+      animation: flash 0.5s ease-in-out;
     }
   </style>
 </head>
@@ -193,7 +206,11 @@
     }
 
     function drawNumber() {
-      document.getElementById("drawResult").textContent = getRandomNumber();
+      const drawResult = document.getElementById("drawResult");
+      drawResult.textContent = getRandomNumber();
+      drawResult.classList.remove("animate");
+      void drawResult.offsetWidth;
+      drawResult.classList.add("animate");
     }
 
     function loadQuestion() {
@@ -202,6 +219,10 @@
 
       const audioBox = document.getElementById("audioPlayer");
       audioBox.innerHTML = `<audio controls><source src="${q.audio}" type="audio/mpeg">您的瀏覽器不支援 audio 元件。</audio>`;
+      const audio = audioBox.querySelector("audio");
+      audio.addEventListener("play", () => {
+        document.getElementById("choicesBox").scrollIntoView({ behavior: "smooth" });
+      });
 
       const choicesBox = document.getElementById("choicesBox");
       const resultBox = document.getElementById("resultBox");
@@ -219,6 +240,12 @@
       if (q.mode === "listen-only") {
         const btn = document.createElement("button");
         btn.textContent = "顯示答案";
+        btn.style.padding = "10px 15px";
+        btn.style.fontSize = "16px";
+        btn.style.borderRadius = "5px";
+        btn.style.border = "1px solid #ccc";
+        btn.style.backgroundColor = "#f0f0f0";
+        btn.style.cursor = "pointer";
         btn.onclick = () => showAnswer(q, btn);
         choicesBox.appendChild(btn);
       } else {
@@ -239,9 +266,11 @@
       if (isCorrect) {
         resultBox.textContent = "✅ 答對了！";
         resultBox.style.color = "green";
+        btn.style.backgroundColor = "#c8f7c5";
       } else {
         resultBox.textContent = "❌ 答錯了！";
         resultBox.style.color = "red";
+        btn.style.backgroundColor = "#f7c5c5";
       }
 
       let infoBox = document.getElementById(infoBoxId);
@@ -261,7 +290,13 @@
         imageBox.appendChild(img);
       }
 
-      document.querySelectorAll(".choices button").forEach(b => b.disabled = true);
+      document.querySelectorAll(".choices button").forEach(b => {
+        b.disabled = true;
+        if (b.textContent === questions[current].choices?.find(c => c.correct)?.text) {
+          b.style.backgroundColor = "#c8f7c5";
+        }
+      });
+
       document.getElementById("nextBtn").style.display = "inline-block";
     }
 
